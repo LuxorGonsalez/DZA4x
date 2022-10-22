@@ -13,6 +13,10 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class CardDeliveryNegativeTest {
+    private String generateDate(int addDays) {
+        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+    }
+
     @BeforeEach
     void setUp() {
         open("http://localhost:9999");
@@ -20,13 +24,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfCityEmpty() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -37,13 +39,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfCityInvalid() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Стамбул");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -54,11 +54,9 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfDateIsEmpty() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue("");
         $("[data-test-id='name'] [type=text]").setValue("Евгений Перчаткин");
@@ -71,13 +69,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfSurnameAndNameIsEmpty() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -88,13 +84,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfInvalidSurnameAndName() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("Evgeny Perchatkin");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -105,13 +99,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfSurnameAndNameConsistsOfNumbers() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("12345");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -122,13 +114,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfSurnameAndNameConsistsOfSpecialCharacters() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id='city'] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id='date'] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id='name'] [type=text]").setValue("!?%%;");
         $("[data-test-id='phone'] [type=tel]").setValue("+79877775432");
         $("[data-test-id=agreement]").click();
@@ -140,13 +130,10 @@ public class CardDeliveryNegativeTest {
     @Test
     public void shouldReturnSuccessIfFieldsAreFilledInCorrectly() {
 
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
-
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("");
         $("[data-test-id=agreement]").click();
@@ -157,13 +144,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfPhoneWithLetters() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("АБВ");
         $("[data-test-id=agreement]").click();
@@ -174,13 +159,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfPhoneHasSpecialCharacters() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("!?%;");
         $("[data-test-id=agreement]").click();
@@ -191,13 +174,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfPhoneIsWrong() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("79877775432");
         $("[data-test-id=agreement]").click();
@@ -208,13 +189,11 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfPhoneWrong() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
 
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("+7987777543");
         $("[data-test-id=agreement]").click();
@@ -225,13 +204,10 @@ public class CardDeliveryNegativeTest {
 
     @Test
     public void shouldReturnErrorMessageIfDoNotTick() {
-        LocalDate deliveryDateCard = LocalDate.now().plusDays(3);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String dateText = deliveryDateCard.format(formatter);
-
         $("[data-test-id=city] [placeholder='Город']").setValue("Казань");
+        String currentDate = generateDate(3);
         $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(dateText);
+        $("[data-test-id=date] [class='input__box'] [placeholder='Дата встречи']").setValue(currentDate);
         $("[data-test-id=name] [type=text]").setValue("Евгений Перчаткин");
         $("[data-test-id=phone] [type=tel]").setValue("+79877775432");
         $("[role=button] .button__content").click();
